@@ -4,44 +4,36 @@
 
 #include <Arduino.h>
 
-#ifdef JURASSIC_PARK
-#include "jurassic_park.h"
-#elif defined(BEEP_BOOP_BEEP)
-#include "beeb-boop-beep.h"
-#endif
-
-
-
 class buzzy
 {
-	private:
-		int _pin;
-		int _noteIndex;
-		int _songLength;
-		uint8_t _loopNum;
-		uint8_t _numLoops;
+private:
+	int _pin;
+	int _noteIndex;
+	int _songLength;
+	uint8_t _loopNum;
+	uint8_t _numLoops;
 
-		bool _debug;
-		bool _isPlaying;
-		bool _noteEnded;
-		
-		unsigned long _noteStartTime;
-		unsigned long _noteEndTime;
-		unsigned long _pauseEndTime;
+	bool _debug;
+	bool _isPlaying;
+	bool _noteEnded;
 
-		int *_frequencies;
-		int *_durations;
-		int *_pauses;
+	unsigned long _noteStartTime;
+	unsigned long _noteEndTime;
+	unsigned long _pauseEndTime;
 
-		void _playNote(int noteIndex);
+	int *_frequencies;
+	int *_durations;
+	int *_pauses;
 
-	public:
-		buzzy(int pin);
-		buzzy(int pin, bool debug);
-		void playSong(int *frequencies, int *durations, int *pauses, int length);
-		void playSong(int *frequencies, int *durations, int *pauses, int length, uint8_t numLoops);
-		void loop(void);
-		bool isPlaying();
+	void _playNote(int noteIndex);
+
+public:
+	buzzy(int pin);
+	buzzy(int pin, bool debug);
+	void playSong(int *frequencies, int *durations, int *pauses, int length);
+	void playSong(int *frequencies, int *durations, int *pauses, int length, uint8_t numLoops);
+	void loop(void);
+	bool isPlaying();
 };
 
 #endif
