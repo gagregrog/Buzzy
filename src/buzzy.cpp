@@ -1,8 +1,8 @@
 #include <buzzy.h>
 
-buzzy::buzzy(int pin) : buzzy(pin, false) {}
+buzzy::buzzy(uint8_t pin) : buzzy(pin, false) {}
 
-buzzy::buzzy(int pin, bool debug)
+buzzy::buzzy(uint8_t pin, bool debug)
 {
 	_pin = pin;
 	_isPlaying = false;
@@ -19,12 +19,12 @@ buzzy::buzzy(int pin, bool debug)
 	pinMode(_pin, OUTPUT);
 }
 
-void buzzy::playSong(int *frequencies, int *durations, int *pauses, int length)
+void buzzy::playSong(uint16_t *frequencies, uint16_t *durations, uint16_t *pauses, uint16_t length)
 {
 	playSong(frequencies, durations, pauses, length, 1);
 }
 
-void buzzy::playSong(int *frequencies, int *durations, int *pauses, int length, uint8_t numLoops)
+void buzzy::playSong(uint16_t *frequencies, uint16_t *durations, uint16_t *pauses, uint16_t length, uint8_t numLoops)
 {
 	_frequencies = frequencies;
 	_durations = durations;
@@ -102,7 +102,7 @@ bool buzzy::isPlaying()
 	return _isPlaying;
 }
 
-void buzzy::_playNote(int noteIndex)
+void buzzy::_playNote(uint16_t noteIndex)
 {
 	unsigned long duration = _durations[noteIndex];
 	_noteStartTime = millis();

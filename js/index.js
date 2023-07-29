@@ -210,10 +210,10 @@ const getArduinoOutput = (notes) => {
   });
   DEBUG && console.log(JSON.stringify(formattedNotes, null, 2).replace(/"/g, ''));
   const output = `
-int noteFrequencies[] = {${formattedNotes.map(({frequency}) => parseInt(frequency, 10)).join(',')}};
-int noteDurations[] = {${formattedNotes.map(({duration}) => parseInt(duration, 10)).join(',')}};
-int notePauses[] = {${formattedNotes.map(({pause}) => parseInt(pause, 10)).join(',')}};
-int numberOfNotes = ${formattedNotes.length};
+uint16_t noteFrequencies[] = {${formattedNotes.map(({frequency}) => parseInt(frequency, 10)).join(',')}};
+uint16_t noteDurations[] = {${formattedNotes.map(({duration}) => parseInt(duration, 10)).join(',')}};
+uint16_t notePauses[] = {${formattedNotes.map(({pause}) => parseInt(pause, 10)).join(',')}};
+uint16_t numberOfNotes = ${formattedNotes.length};
   `;
   console.log(output);
 }
