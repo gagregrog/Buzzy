@@ -4,6 +4,13 @@
 
 #include <Arduino.h>
 
+typedef struct note
+{
+	uint16_t frequency;
+	uint16_t duration;
+	uint16_t pause;
+};
+
 class buzzy
 {
 private:
@@ -21,17 +28,15 @@ private:
 	unsigned long _noteEndTime;
 	unsigned long _pauseEndTime;
 
-	uint16_t *_frequencies;
-	uint16_t *_durations;
-	uint16_t *_pauses;
+	note *_notes;
 
 	void _playNote(uint16_t noteIndex);
 
 public:
 	buzzy(uint8_t pin);
 	buzzy(uint8_t pin, bool debug);
-	void playSong(uint16_t *frequencies, uint16_t *durations, uint16_t *pauses, uint16_t length);
-	void playSong(uint16_t *frequencies, uint16_t *durations, uint16_t *pauses, uint16_t length, uint8_t numLoops);
+	void playSong(note *notes, uint16_t length);
+	void playSong(note *frequencies, uint16_t length, uint8_t numLoops);
 	void loop(void);
 	bool isPlaying();
 };

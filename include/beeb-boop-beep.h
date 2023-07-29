@@ -1,8 +1,6 @@
 // https://dopeloop.ai/melody-generator
 
-#include <Arduino.h>
+#include "buzzy.h"
 
-uint16_t noteFrequencies[] = {349, 523, 440};
-uint16_t noteDurations[] = {62, 62, 62};
-uint16_t notePauses[] = {62, 62, 187};
+note notes[] = {{349, 62, 62}, {523, 62, 62}, {440, 62, 187}};
 uint16_t numberOfNotes = 3;

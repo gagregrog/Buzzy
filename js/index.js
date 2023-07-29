@@ -135,13 +135,6 @@ const midiToFrequency = {
 };
 
 const getArduinoOutput = (notes) => {
-  // const sortedNotes = [...notes].sort((a, b) => {
-  //   const diff = a.time - b.time;
-  //   if (!diff) {
-  //     return b.duration - a.duration
-  //   }
-  //   return diff;
-  // });
   const sortedNotes = notes;
 
   const notesWithoutOverlap = [];
@@ -210,11 +203,9 @@ const getArduinoOutput = (notes) => {
   });
   DEBUG && console.log(JSON.stringify(formattedNotes, null, 2).replace(/"/g, ''));
   const output = `
-uint16_t noteFrequencies[] = {${formattedNotes.map(({frequency}) => parseInt(frequency, 10)).join(',')}};
-uint16_t noteDurations[] = {${formattedNotes.map(({duration}) => parseInt(duration, 10)).join(',')}};
-uint16_t notePauses[] = {${formattedNotes.map(({pause}) => parseInt(pause, 10)).join(',')}};
+note notes[] = {${formattedNotes.map((note) => `{${[note.frequency, note.duration, note.pause].map(part => parseInt(part, 10)).join(',')}}`)}};
 uint16_t numberOfNotes = ${formattedNotes.length};
-  `;
+`;
   console.log(output);
 }
 

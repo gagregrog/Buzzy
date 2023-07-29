@@ -37,12 +37,8 @@ function translate(puck_song, speed) {
     lastNote = note;
   }
 
-  const output = `
-uint16_t noteFrequencies[] = {${notes.map((frequency) => parseInt(frequency, 10)).join(',')}};
-uint16_t noteDurations[] = {${durations.map((duration) => parseInt(duration, 10)).join(',')}};
-uint16_t notePauses[] = {${pauses.map((pause) => parseInt(pause, 10)).join(',')}};
-uint16_t numberOfNotes = ${notes.length};
-  `;
+  const groupedNotes = frequency.map((freq, i) => [freq, durations[i], pauses[i]]);
+  const output = `note notes[] = {${groupedNotes.map((groupedNote) => `{${groupedNote.map((val) => parseInt(val, 10))).join(',')}}`).join(',')}};`;
 
   console.log(output);
 }
