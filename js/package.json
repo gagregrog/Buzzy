@@ -1,0 +1,13 @@
+{
+  "name": "midi-converter",
+  "version": "1.0.0",
+  "description": "convert a midi file to buzzy syntax for arduino",
+  "main": "index.js",
+  "repository": "https://github.com/gagregrog/buzzy",
+  "author": "gagregrog",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "simonadcock-midiconvert": "^0.0.2"
+  }
+}

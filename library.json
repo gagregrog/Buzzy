@@ -1,0 +1,25 @@
+{
+  "name": "Buzzy",
+  "version": "1.0.0",
+  "description": "Play songs on a piezo buzzer without blocking.",
+  "keywords": "buzzer,piezo,song,melody,tone",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gagregrog/Buzzer.git"
+  },
+  "authors": [
+    {
+      "name": "gagregrog",
+      "email": "gagregrog@gmail.com",
+      "url": "https://github.com/gagregrog",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gagregrog/Buzzer",
+  "dependencies": {
+    "evert-arias/EasyButton": "^2.0.1"
+  },
+  "frameworks": "arduino",
+  "platforms": "*"
+}
