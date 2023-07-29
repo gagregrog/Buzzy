@@ -4,6 +4,14 @@
 
 #include <Arduino.h>
 
+#ifdef JURASSIC_PARK
+#include "jurassic_park.h"
+#elif defined(BEEP_BOOP_BEEP)
+#include "beeb-boop-beep.h"
+#endif
+
+
+
 class buzzy
 {
 	private:
