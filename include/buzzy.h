@@ -11,6 +11,8 @@ typedef struct note
 	uint16_t pause;
 };
 
+#define NOTES(notes) notes, sizeof(notes) / sizeof(note)
+
 class buzzy
 {
 private:
