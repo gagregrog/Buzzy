@@ -50,6 +50,7 @@ public:
 	void playSong(const note *notes, uint16_t length, uint8_t numLoops);
 	void loop(void);
 	bool isPlaying();
+	void stop();
 };
 
 #endif

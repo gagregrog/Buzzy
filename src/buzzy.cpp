@@ -44,6 +44,25 @@ void buzzy::playSong(const note *notes, uint16_t length, uint8_t numLoops)
 	_playNote(0);
 }
 
+void buzzy::stop()
+{
+	if (_debug)
+	{
+		Serial.println("[BUZZY] Stop!");
+	}
+	noTone(_pin);
+	_notes = nullptr;
+	_isPlaying = false;
+	_noteStartTime = 0;
+	_noteEndTime = 0;
+	_pauseEndTime = 0;
+	_noteEnded = false;
+	_songLength = 0;
+	_noteIndex = 0;
+	_numLoops = 0;
+	_loopNum = 0;
+}
+
 void buzzy::loop(void)
 {
 	if (!_isPlaying)
