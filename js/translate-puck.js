@@ -38,7 +38,7 @@ function translate(puck_song, speed) {
   }
 
   const groupedNotes = frequency.map((freq, i) => [freq, durations[i], pauses[i]]);
-  const output = `note notes[] = {${groupedNotes.map((groupedNote) => `{${groupedNote.map((val) => parseInt(val, 10))).join(',')}}`).join(',')}};`;
+  const output = `const note notes[${groupedNotes.length}] PROGMEM = {${groupedNotes.map((groupedNote) => `{${groupedNote.map((val) => parseInt(val, 10))).join(',')}}`).join(',')}};`;
 
   console.log(output);
 }

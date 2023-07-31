@@ -9,9 +9,18 @@ typedef struct note
 	uint16_t frequency;
 	uint16_t duration;
 	uint16_t pause;
-};
+} note;
 
-#define NOTES(notes) notes, sizeof(notes) / sizeof(note)
+template <typename T>
+void PROGMEM_read(const T *source, T &destination)
+{
+	memcpy_P(&destination, source, sizeof(T));
+}
+
+template <typename T, size_t N>
+size_t ArraySize(T (&)[N]) { return N; }
+
+#define NOTES(notes) notes, ArraySize(notes)
 
 class buzzy
 {
@@ -30,15 +39,15 @@ private:
 	unsigned long _noteEndTime;
 	unsigned long _pauseEndTime;
 
-	note *_notes;
+	const note *_notes;
 
 	void _playNote(uint16_t noteIndex);
 
 public:
 	buzzy(uint8_t pin);
 	buzzy(uint8_t pin, bool debug);
-	void playSong(note *notes, uint16_t length);
-	void playSong(note *frequencies, uint16_t length, uint8_t numLoops);
+	void playSong(const note *notes, uint16_t length);
+	void playSong(const note *notes, uint16_t length, uint8_t numLoops);
 	void loop(void);
 	bool isPlaying();
 };

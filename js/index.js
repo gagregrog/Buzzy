@@ -203,7 +203,7 @@ const getArduinoOutput = (notes) => {
   });
   DEBUG && console.log(JSON.stringify(formattedNotes, null, 2).replace(/"/g, ''));
   const output = `
-note notes[] = {${formattedNotes.map((note) => `{${[note.frequency, note.duration, note.pause].map(part => parseInt(part, 10)).join(',')}}`)}};
+const note notes[${formattedNotes.length}] PROGMEM = {${formattedNotes.map((note) => `{${[note.frequency, note.duration, note.pause].map(part => parseInt(part, 10)).join(',')}}`)}};
 `;
   console.log(output);
 }

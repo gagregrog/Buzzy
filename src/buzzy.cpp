@@ -19,12 +19,12 @@ buzzy::buzzy(uint8_t pin, bool debug)
 	pinMode(_pin, OUTPUT);
 }
 
-void buzzy::playSong(note *notes, uint16_t length)
+void buzzy::playSong(const note *notes, uint16_t length)
 {
 	playSong(notes, length, 1);
 }
 
-void buzzy::playSong(note *notes, uint16_t length, uint8_t numLoops)
+void buzzy::playSong(const note *notes, uint16_t length, uint8_t numLoops)
 {
 	_notes = notes;
 	_songLength = length;
@@ -102,12 +102,14 @@ bool buzzy::isPlaying()
 
 void buzzy::_playNote(uint16_t noteIndex)
 {
-	unsigned long duration = _notes[noteIndex].duration;
+	note currentNote;
+	PROGMEM_read(&_notes[noteIndex], currentNote);
+	unsigned long duration = currentNote.duration;
 	_noteStartTime = millis();
 	_noteEndTime = _noteStartTime + duration;
-	_pauseEndTime = _noteEndTime + _notes[noteIndex].pause;
+	_pauseEndTime = _noteEndTime + currentNote.pause;
 	_noteEnded = false;
-	tone(_pin, _notes[noteIndex].frequency, duration);
+	tone(_pin, currentNote.frequency, duration);
 	if (_debug)
 	{
 		Serial.print("[BUZZY] Playing note: ");

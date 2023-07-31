@@ -4,6 +4,13 @@
 const int buzzerPin = 10;
 buzzy buzzer(buzzerPin);
 
+// example notes
+//  {noteFrequency, noteDuration, pauseLengthAfterNote}
+// const note notes[2] PROGMEM = {
+//  {400, 500, 300},
+//  {500, 200, 400}
+// }
+
 void setup()
 {
   Serial.begin(115200);
