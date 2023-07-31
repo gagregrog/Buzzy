@@ -51,6 +51,7 @@ public:
 	void loop(void);
 	bool isPlaying();
 	void stop();
+	void pause();
 };
 
 #endif

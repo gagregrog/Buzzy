@@ -63,6 +63,16 @@ void buzzy::stop()
 	_loopNum = 0;
 }
 
+void buzzy::pause()
+{
+	if (_debug)
+	{
+		Serial.println(isPlaying() ? "[BUZZY] Pause!" : "[BUZZY] Resume!");
+	}
+
+	_isPlaying = !_isPlaying;
+}
+
 void buzzy::loop(void)
 {
 	if (!_isPlaying)
