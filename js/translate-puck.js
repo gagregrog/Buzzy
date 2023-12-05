@@ -6,41 +6,56 @@ const pitchMap = { "a": 220, "a#": 233.08, "b": 246.94, "c": 261.63,
 
 const heman = "ee  ee  ee  C#C#C#C#   C#C#  C#C#  AA  AA  AA  AA  ee  ee  ee  dddddd  c#c#  c#c#c#c#    dd  dd  C#C#  BBBB    dd  dd  dddd   C#C#C#C#   BBBBB  BB  C#C#C# AAAAAA     AA  f#f#  AA  f#f#  AA  AAAAA  AA  BBBB   BBB  C#C#C#C#   AAAAA";
 
+const sinterklaas_one = 'gggg  gggg  AAAA  AAAA  gggAAAgggfffeeeeecccccc';
+const sinterklaas_two = 'ffff  ffff  ffff  dddddd fffffff  fffffff     AAAA  gggg  ffff  eeee  ddddddd  ccccccc';
+const sinterklaas_verse = sinterklaas_one + ' ' + sinterklaas_one + ' ' + sinterklaas_two + '     ';
+
 function translate(puck_song, speed) {
-  const notes = [];
+  const frequencies = [];
   const durations = [];
   const pauses = [];
 
-  let lastNote = '';
+  let lastFrequency = '';
   for (let i = 0; i < puck_song.length; i++) {
-    let note = puck_song[i];
+    let frequency = puck_song[i];
     if (puck_song[i + 1] === '#') {
-      note += '#';
+      frequency += '#';
       i+= 1;
     }
     
-    if (note !== lastNote) {
-      if (note !== ' ') {
-        notes.push(pitchMap[note]);
+    if (frequency !== lastFrequency) {
+      if (frequency !== ' ') {
+        frequencies.push(pitchMap[frequency]);
         durations.push(speed);
         pauses.push(0);
       } else {
         pauses[pauses.length - 1] += speed;
       }
     } else {
-      if (note !== ' ') {
+      if (frequency !== ' ') {
         durations[durations.length - 1] += speed;
       } else {
         pauses[pauses.length - 1] += speed;
       }
     }
-    lastNote = note;
+    lastFrequency = frequency;
   }
 
-  const groupedNotes = frequency.map((freq, i) => [freq, durations[i], pauses[i]]);
-  const output = `const note notes[${groupedNotes.length}] PROGMEM = {${groupedNotes.map((groupedNote) => `{${groupedNote.map((val) => parseInt(val, 10))).join(',')}}`).join(',')}};`;
+  const noteDefinitions = frequencies.map((freq, i) => [freq, durations[i], pauses[i]]);
+  const arraySize = noteDefinitions.length;
+  const allCharArrays = noteDefinitions.map(convertNoteDefintionToCharArray).join(',');
+  const output = `const note notes[${arraySize}] PROGMEM = {${allCharArrays}};`;
 
   console.log(output);
 }
 
-translate(heman, 50);
+function convertNoteDefintionToCharArray(noteDefinition) {
+  const coercedNotes = noteDefinition.map(coerceInteger);
+  return `{${coercedNotes.join(',')}}`;
+}
+
+function coerceInteger(val) {
+  return parseInt(val, 10)
+}
+
+translate(sinterklaas_verse, 50);
